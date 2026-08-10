@@ -25,19 +25,19 @@ export const AdBanner = ({ slot = "1111111111", format = "auto" }) => {
           <DollarSign className="w-3.5 h-3.5 text-emerald-400" /> Sponsored Ad Banner (Google AdSense)
         </div>
 
-        {/* AdSense Isolated Node */}
+        {/* AdSense Isolated Node with User Real Publisher ID */}
         <div ref={adRef} suppressHydrationWarning>
           <ins
             className="adsbygoogle"
             style={{ display: 'block', minHeight: '90px' }}
-            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+            data-ad-client="ca-pub-2090516545725907"
             data-ad-slot={slot}
             data-ad-format={format}
             data-full-width-responsive="true"
           ></ins>
         </div>
 
-        {/* Fallback Display for Dev Preview */}
+        {/* Display Banner Preview */}
         <div className="py-4 px-6 bg-gradient-to-r from-slate-900/60 via-cyan-950/30 to-slate-900/60 rounded-xl border border-dashed border-cyan-500/40 flex flex-col sm:flex-row items-center justify-center text-center gap-3 mt-2">
           <div className="text-center sm:text-left">
             <div className="text-xs font-bold text-cyan-300 font-syne">Solar EPC Tooling Sponsor</div>
@@ -45,7 +45,7 @@ export const AdBanner = ({ slot = "1111111111", format = "auto" }) => {
           </div>
           <div className="sm:ml-auto">
             <span className="text-[10px] bg-cyan-500/20 text-cyan-300 font-mono px-3 py-1 rounded-full border border-cyan-500/30 font-bold">
-              AdSense Slot Active
+              AdSense Live (ca-pub-2090516545725907)
             </span>
           </div>
         </div>
