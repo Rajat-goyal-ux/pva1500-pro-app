@@ -33,9 +33,13 @@ export const Header = ({ onOpenUpgrade, onOpenFeedback, darkMode, setDarkMode })
         </div>
       </div>
 
-      {/* Subtitle */}
-      <div className="text-[11px] text-slate-400 font-mono text-center">
-        IEC 60891 Solar PV Analytics Engine
+      {/* Subtitle with Live Pulse Status */}
+      <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 font-mono text-center">
+        <span>IEC 60891 Solar PV Analytics Engine</span>
+        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[10px]">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          Live Active
+        </span>
       </div>
 
       {/* Row 2: Centered Actions & Profile */}
