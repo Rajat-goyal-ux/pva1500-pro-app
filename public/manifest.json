@@ -1,0 +1,23 @@
+{
+  "short_name": "PVA1500 Pro",
+  "name": "PVA-1500 IV Curve Analysis Tool Pro",
+  "description": "Professional Solar PV String I-V Curve Correction & IEC Standard Inspection Analytics Tool",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0d1b2e",
+  "theme_color": "#00c2ff",
+  "display": "standalone",
+  "orientation": "any"
+}
