@@ -1,4 +1,5 @@
 {
+  "name": "pva1500-pro-app",
   "framework": "nextjs",
   "headers": [
     {
