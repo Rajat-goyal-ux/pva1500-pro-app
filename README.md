@@ -1,7 +1,7 @@
 # ☀️ PVA-1500 Pro | Solar I-V Curve Analysis Platform
 
-> **Production-grade Solar PV String Inspection Tool & IEC 60891 Standard Calculation Engine.**
-> Built with React 18, Vite, Chart.js, Firebase Google Auth, Google AdSense, Tailwind/Vanilla Glassmorphic Design, and Progressive Web App (PWA) installation for Windows & Android.
+> **Production-grade Solar PV String Inspection Tool & IEC 60891 Standard Calculation Engine.**  
+> Built with Next.js 15 App Router, React 19, Vite 5, Chart.js, Firebase Google Auth, Google AdSense, Tailwind/Vanilla Glassmorphic Design, and Progressive Web App (PWA) installation for Windows & Android.
 
 ---
 
@@ -20,10 +20,9 @@
    - OAuth Google Sign-In with avatar sync and logout session management.
 
 4. **Freemium & AdSense Monetization**:
+   - Pre-rendered Google AdSense meta tag (`ca-pub-2090516545725907`) and script tags.
    - Integrated Google AdSense banner placements (`<AdBanner />`).
    - Free vs Pro Tier subscription model ($9.99/mo).
-   - Free Tier: AdSense supported + 5 CSV batch limit + Watermarked PDF export.
-   - Pro Tier: Ad-free experience + Unlimited bulk CSV analysis + Unwatermarked PDF/Excel export.
 
 5. **Cross-Platform (Windows & Android App)**:
    - Full Progressive Web App (PWA) manifest with Service Worker offline support.
@@ -35,20 +34,18 @@
 
 ```bash
 # 1. Install dependencies
-npm install
+npm install --legacy-peer-deps
 
-# 2. Run local development server
+# 2. Run Next.js local development server
 npm run dev
 
-# 3. Build production bundle
+# 3. Build Next.js production bundle
 npm run build
 ```
 
 ---
 
 ## 🐙 Step-by-Step GitHub Setup Guide
-
-Follow these terminal commands to publish your app to GitHub:
 
 ```bash
 # 1. Initialize Git repository
@@ -58,13 +55,13 @@ git init
 git add .
 
 # 3. Create initial commit
-git commit -m "Initial commit: PVA-1500 Pro IV Analysis Web App"
+git commit -m "Initial commit: PVA-1500 Pro Solar Analytics Platform"
 
 # 4. Rename main branch
 git branch -M main
 
-# 5. Add your GitHub repository remote URL (Replace with your GitHub repo URL)
-git remote add origin https://github.com/YOUR_USERNAME/pva1500-pro-app.git
+# 5. Add remote URL
+git remote add origin https://github.com/Rajat-goyal-ux/pva1500-pro-app.git
 
 # 6. Push to GitHub
 git push -u origin main
@@ -77,12 +74,8 @@ git push -u origin main
 1. Go to [Vercel.com](https://vercel.com) and log in with your GitHub account.
 2. Click **"Add New"** -> **"Project"**.
 3. Import your `pva1500-pro-app` repository from GitHub.
-4. Keep framework preset as **Vite**.
-5. Add Environment Variables (Optional for Firebase):
-   - `VITE_FIREBASE_API_KEY`
-   - `VITE_FIREBASE_AUTH_DOMAIN`
-   - `VITE_FIREBASE_PROJECT_ID`
-6. Click **"Deploy"**. Your app will be live on `https://pva1500-pro-app.vercel.app` in under 30 seconds!
+4. Keep framework preset as **Next.js** (or Vite).
+5. Click **"Deploy"**. Your app will be live on `https://pva1500-pro-jlnm0vrdf-rajatgoyal8770-6375s-projects.vercel.app/`!
 
 ---
 
@@ -94,16 +87,10 @@ git push -u origin main
 3. Select **"Install App"** or **"Add to Home Screen"**.
 4. The PVA-1500 app will appear on the Android home screen with its own full-screen app icon!
 
-### Method B: Generate Native Android APK (Google Play Store)
-1. Go to [PWABuilder.com](https://www.pwabuilder.com/).
-2. Enter your live Vercel URL (e.g. `https://pva1500-pro-app.vercel.app`).
-3. Click **"Package for Store"** -> **"Android"**.
-4. Download the generated `.apk` or `.aab` file ready for the Google Play Store!
-
 ---
 
 ## 🔒 Security Hardening
 
 - **Sanitized CSV Parsing**: Strips HTML tags and script payloads from CSV string values.
-- **CSP Headers**: Defined in `vercel.json` (`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`).
+- **Security Headers**: Defined in `vercel.json` (`X-Frame-Options: SAMEORIGIN`, `Access-Control-Allow-Origin: *`, `X-Content-Type-Options: nosniff`).
 - **Local In-Browser Calculation**: PV plant data is processed locally in the client browser without sending sensitive solar string data to third-party databases.
