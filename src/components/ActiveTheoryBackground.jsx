@@ -1,9 +1,13 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 
 export const ActiveTheoryBackground = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

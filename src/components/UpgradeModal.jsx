@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import confetti from 'canvas-confetti';
@@ -16,11 +18,13 @@ export const UpgradeModal = ({ isOpen, onClose }) => {
       setProcessing(false);
       
       // Fire celebration confetti!
-      confetti({
-        particleCount: 120,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+      if (typeof window !== 'undefined') {
+        confetti({
+          particleCount: 120,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
 
       onClose();
     }, 1200);

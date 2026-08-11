@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Zap, LogOut, LogIn, Crown, Sun, Moon, HelpCircle } from 'lucide-react';

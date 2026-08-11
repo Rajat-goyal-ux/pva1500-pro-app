@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { DollarSign, ExternalLink, Zap } from 'lucide-react';
@@ -9,6 +11,8 @@ export const AdBanner = ({ scriptUrl, adKey, slot = "1111111111", format = "auto
   if (isPro) return null;
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // If a custom Adsterra/Monetag script URL is passed or globally set
     if (scriptUrl && adRef.current) {
       try {

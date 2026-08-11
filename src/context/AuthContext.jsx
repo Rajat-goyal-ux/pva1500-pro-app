@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { signInWithPopup, signOut as firebaseSignOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, googleProvider } from '../config/firebase';
@@ -8,7 +10,10 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userTier, setUserTier] = useState(() => {
-    return localStorage.getItem('pva_user_tier') || 'FREE';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('pva_user_tier') || 'FREE';
+    }
+    return 'FREE';
   });
 
   useEffect(() => {
@@ -27,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         });
       } else {
         // Fallback or guest user check
-        const savedGuest = localStorage.getItem('pva_guest_user');
+        const savedGuest = typeof window !== 'undefined' ? localStorage.getItem('pva_guest_user') : null;
         if (savedGuest) {
           setUser(JSON.parse(savedGuest));
         } else {
@@ -64,7 +69,9 @@ export const AuthProvider = ({ children }) => {
       photoURL: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'
     };
     setUser(mockUser);
-    localStorage.setItem('pva_guest_user', JSON.stringify(mockUser));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('pva_guest_user', JSON.stringify(mockUser));
+    }
     return mockUser;
   };
 
@@ -75,17 +82,23 @@ export const AuthProvider = ({ children }) => {
       console.log('Logout error', e);
     }
     setUser(null);
-    localStorage.removeItem('pva_guest_user');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('pva_guest_user');
+    }
   };
 
   const upgradeToPro = () => {
     setUserTier('PRO');
-    localStorage.setItem('pva_user_tier', 'PRO');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('pva_user_tier', 'PRO');
+    }
   };
 
   const downgradeToFree = () => {
     setUserTier('FREE');
-    localStorage.setItem('pva_user_tier', 'FREE');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('pva_user_tier', 'FREE');
+    }
   };
 
   return (

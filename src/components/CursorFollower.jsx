@@ -1,9 +1,13 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 
 export const CursorFollower = () => {
   const [pos, setPos] = useState({ x: -100, y: -100 });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleMove = (e) => {
       setPos({ x: e.clientX, y: e.clientY });
     };
