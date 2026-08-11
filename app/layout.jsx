@@ -1,11 +1,17 @@
 import Script from 'next/script';
 import './globals.css';
 
+export const viewport = {
+  themeColor: '#020408',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata = {
   title: 'PVA-1500 Pro | Solar I-V Curve Analysis Platform',
   description: 'PVA-1500 Pro IV Analysis Tool - Professional Solar PV Plant Inspection, I-V Curve Corrections, IEC Standards Compliance & Report Generator.',
   manifest: '/manifest.json',
-  themeColor: '#020408',
 };
 
 export default function RootLayout({ children }) {
