@@ -9,6 +9,7 @@ import { AdBanner } from './components/AdBanner';
 import { UpgradeModal } from './components/UpgradeModal';
 import { FeedbackModal } from './components/FeedbackModal';
 import { LegalModals } from './components/LegalModals';
+import { AdRewardedModal } from './components/AdRewardedModal';
 import { Footer } from './components/Footer';
 import { ActiveTheoryBackground } from './components/ActiveTheoryBackground';
 import { CursorFollower } from './components/CursorFollower';
@@ -61,6 +62,12 @@ export function App() {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [activeLegalModal, setActiveLegalModal] = useState(null);
+
+  // Ad-Rewarded Report Download State
+  const [showAdRewardedModal, setShowAdRewardedModal] = useState(false);
+  const [rewardedReportType, setRewardedReportType] = useState('PDF');
+  // Set adsenseApproved to false for CURRENT 100% FREE ACCESS. Set to true once approved!
+  const [adsenseApproved, setAdsenseApproved] = useState(false);
 
   // STC Configuration Specs
   const [stcSpecs, setStcSpecs] = useState(INITIAL_STC_SPECS);
@@ -180,12 +187,31 @@ export function App() {
     );
   });
 
-  const handleDownloadPdf = () => {
+  // Report Trigger Handlers
+  const handleOpenPdfModal = () => {
     if (!analysisData || analysisData.length === 0) {
       alert('Please click "Run IEC Analysis" or upload CSV files first.');
       return;
     }
-    exportPdfReport(reportInfo, stcSpecs, analysisData, isPro);
+    setRewardedReportType('PDF');
+    setShowAdRewardedModal(true);
+  };
+
+  const handleOpenExcelModal = () => {
+    if (!analysisData || analysisData.length === 0) {
+      alert('Please click "Run IEC Analysis" or upload CSV files first.');
+      return;
+    }
+    setRewardedReportType('XLSX');
+    setShowAdRewardedModal(true);
+  };
+
+  const executeDownload = () => {
+    if (rewardedReportType === 'PDF') {
+      exportPdfReport(reportInfo, stcSpecs, analysisData, isPro);
+    } else {
+      exportExcelData(reportInfo, stcSpecs, analysisData);
+    }
   };
 
   return (
@@ -207,7 +233,7 @@ export function App() {
       <div className="max-w-4xl w-full mx-auto px-6 pt-3 pb-1 flex items-center justify-center text-center z-10">
         <div className="trending-pill cursor-pointer px-5 py-1.5 text-xs shadow-lg shadow-cyan-500/20 mx-auto" onClick={() => setShowUpgradeModal(true)}>
           <Radio className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-          <span className="font-syne font-bold text-white tracking-wider">PVA-1500 PRO • AUTOMATIC REPORT GENERATOR ACTIVE</span>
+          <span className="font-syne font-bold text-white tracking-wider">PVA-1500 PRO • UNLIMITED FREE REPORT ACCESS ACTIVE</span>
           <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
         </div>
       </div>
@@ -257,7 +283,7 @@ export function App() {
           </div>
         </div>
 
-        {/* STEP 2: STC SPECIFICATIONS & SITE DETAILS FORMS (AFTER FILE UPLOAD) */}
+        {/* STEP 2: STC SPECIFICATIONS & SITE DETAILS FORMS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mx-auto">
           
           {/* Module STC Specs Card */}
@@ -405,7 +431,7 @@ export function App() {
 
         </div>
 
-        {/* STEP 3: RUN ANALYSIS BUTTON (AFTER SPECIFICATIONS & SITE DETAILS) */}
+        {/* STEP 3: RUN ANALYSIS BUTTON */}
         <div className="glass-card-transparent max-w-xl w-full p-4 flex flex-wrap items-center justify-center gap-4 text-center mx-auto border-2 border-cyan-400/40 shadow-xl shadow-cyan-500/20">
           <button
             onClick={runAnalysis}
@@ -438,7 +464,7 @@ export function App() {
           <span>{statusMsg.text}</span>
         </div>
 
-        {/* STEP 4 & 5: RESULTS SECTION (METRICS, CHART, TABLE) */}
+        {/* STEP 4 & 5: RESULTS SECTION */}
         {analysisData.length > 0 && (
           <div className="w-full space-y-8 pt-2 text-center">
 
@@ -518,26 +544,28 @@ export function App() {
               </div>
             </div>
 
-            {/* STEP 6: VERY LAST SECTION: REPORT GENERATE & DOWNLOAD BUTTONS AT THE END */}
-            <div className="glass-card-transparent max-w-2xl w-full p-5 flex flex-col sm:flex-row items-center justify-center gap-4 text-center mx-auto border-2 border-cyan-400/40">
+            {/* STEP 6: REPORT GENERATE & DOWNLOAD BUTTONS (AD REWARDED LOGIC) */}
+            <div className="glass-card-transparent max-w-2xl w-full p-5 flex flex-col sm:flex-row items-center justify-center gap-4 text-center mx-auto border-2 border-cyan-400/40 shadow-xl shadow-cyan-500/20">
               <div className="space-y-2 text-center w-full">
                 <div className="text-base font-bold font-syne text-white">
                   📄 Download Official Certified Inspection Report
                 </div>
                 <p className="text-xs text-slate-300 font-mono">
-                  Export verified PDF inspection certificate or raw XLSX sheet
+                  {adsenseApproved
+                    ? 'Watch 1 sponsored ad to generate unlimited PDF & XLSX reports!'
+                    : '🎉 Pre-Approval Mode Active: 100% Free Unlimited PDF & XLSX Reports!'}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                   <button
-                    onClick={handleDownloadPdf}
-                    className="btn-animated-cyber bg-gradient-to-r from-cyan-400 via-cyan-500 to-emerald-400 text-slate-950 font-extrabold text-xs py-3 px-6"
+                    onClick={handleOpenPdfModal}
+                    className="btn-animated-cyber bg-gradient-to-r from-cyan-400 via-cyan-500 to-emerald-400 text-slate-950 font-extrabold text-xs py-3 px-6 shadow-cyan-500/50"
                   >
                     <Download className="w-4 h-4 fill-current" />
                     <span>📄 Download Certified PDF Report</span>
                   </button>
 
                   <button
-                    onClick={() => exportExcelData(reportInfo, stcSpecs, analysisData)}
+                    onClick={handleOpenExcelModal}
                     className="btn-animated-glass py-3 px-6 text-xs text-emerald-400 border-emerald-500/40 hover:bg-emerald-500/10 font-bold"
                   >
                     <FileSpreadsheet className="w-4 h-4" />
@@ -562,6 +590,13 @@ export function App() {
       <UpgradeModal isOpen={showUpgradeModal} onClose={() => setShowUpgradeModal(false)} />
       <FeedbackModal isOpen={showFeedbackModal} onClose={() => setShowFeedbackModal(false)} />
       <LegalModals activeModal={activeLegalModal} onClose={() => setActiveLegalModal(null)} />
+      <AdRewardedModal
+        isOpen={showAdRewardedModal}
+        onClose={() => setShowAdRewardedModal(false)}
+        onConfirmDownload={executeDownload}
+        reportType={rewardedReportType}
+        adsenseApproved={adsenseApproved}
+      />
     </div>
   );
 }
