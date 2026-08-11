@@ -23,7 +23,14 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
 
-        {/* Official Google AdSense Integration Script */}
+        {/* Static Inline Script for Direct AdSense Crawler Scanning */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2090516545725907"
+          crossOrigin="anonymous"
+        ></script>
+
+        {/* Next.js Interactive Script */}
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2090516545725907"
           strategy="afterInteractive"
