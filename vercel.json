@@ -1,4 +1,8 @@
 {
+  "alias": [
+    "pva1500pro.vercel.app",
+    "pva1500-pro-app.vercel.app"
+  ],
   "headers": [
     {
       "source": "/(.*)",

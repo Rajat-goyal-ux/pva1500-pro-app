@@ -7,4 +7,4 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-Sitemap: https://pva1500-pro-jlnm0vrdf-rajatgoyal8770-6375s-projects.vercel.app/sitemap.xml
+Sitemap: https://pva1500pro.vercel.app/sitemap.xml
